@@ -1,0 +1,25 @@
+body{
+  text-align: center;
+}
+
+
+h1{
+color: black;
+
+}
+
+button{
+
+}
+
+
+div#board{
+  background-color: green;
+  border: 5px solid green;
+  width: 500px;
+  height: 200px;
+
+  position: relative;
+  float: left;
+  display: inline-block;
+}
