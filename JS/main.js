@@ -1,15 +1,12 @@
 //console.log("Testing");
-// variables
+// global variables
+var totalCardsInDeck;
 
 
 
 
-//Functions
+/* Functions */
 
-
-/* Make a card deck
---------------------------------------------------------
-*/
 
 /* Create a card object that will create a value, name, and suit
 for each card */
@@ -38,14 +35,33 @@ function deck(){
 
 
 var myDeck = new deck();
-console.log(myDeck);
 
-/* ---------------------------------------------------------
-Start the game by pressing the button "Deal" */
+
+/* *****Event Listeners******* */
+
+/* Trigger the click event */
+
+
+
 
 /* Shuffle and split the cards for both players */
 
+function shuffle(o) {
+  for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+  return o;
+};
+
+myDeck = shuffle(myDeck);
 
 
+
+
+/* Draw a card using a trigger
+
+/* Trigger  War Mode when both opponents card are matched even.
+
+/* Winning / Losing part.
+
+/* Restart the game when the game is finished */
 
 
