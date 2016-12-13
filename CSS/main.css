@@ -64,7 +64,7 @@ a{
   text-align: center;
 }
 
-.button {
+button {
   position: absolute;
   top: 50%;
 }

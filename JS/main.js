@@ -1,57 +1,104 @@
 //console.log("Testing");
 // global variables
-var totalCardsInDeck;
-
+var deck;
+var playerDecks;
+var wonDecks;
+var battleCards;
 
 
 
 /* Functions */
 
+function initialize() {
+  buildDeck();
+  shuffleDeck();
+  dealPlayerCards();
+  wonDecks = [[], []];
+  battleCards = [null, null;
+  render();
+}
+
+function render() {
+  renderPlayersWonCount();
+  renderPlayersDecks();
+  renderBattleCards();
+}
+
+function renderPlayersWonCount() {
+
+}
+
+function renderPlayersDecks() {
+
+}
+
+function renderBattleCards() {
+
+}
+
+
+
 
 /* Create a card object that will create a value, name, and suit
 for each card */
 
-function card(value, name, suit){
+function Card(value, name){
   this.value = value;
   this.name = name;
-  this.suit = suit;
 }
 
-/* create a deck object which will create an area of 52 cards. */
-
-function deck(){
-  this.names = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-  this.suits = ['Hearts','Diamonds','Spades','Clubs'];
-  var cards = [];
-
-    for( var s = 0; s < this.suits.length; s++ ) {
-        for( var n = 0; n < this.names.length; n++ ) {
-            cards.push( new card( n+1, this.names[n], this.suits[s] ) );
-        }
-    }
-
-    return cards;
+function dealPlayerCards() {
+  playerDecks = [[], []];
+  while(deck.length) {
+    playerDecks[0].push(deck.pop());
+    playerDecks[1].push(deck.pop());
+  }
+  console.log(playerDecks)
 }
 
+/* create a deck array which will create an area of 52 cards. */
+function buildDeck(){
+  var names = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
+  var values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  var suits = ['h','d','s','c'];
+  deck = [];
 
-var myDeck = new deck();
+  names.forEach(function(name, idx) {
+    suits.forEach(function(suit) {
+      deck.push({
+        name: name,
+        suit: suit,
+        value: values[idx]
+      });
+    });
+  });
+}
 
 
 /* *****Event Listeners******* */
 
 /* Trigger the click event */
+document.getElementById('deal-btn').addEventListener('click', handleDealClick);
 
 
+/* *****Functions******* */
 
+function handleDealClick() {
+  console.log('deal button clicked')
+}
 
 /* Shuffle and split the cards for both players */
 
-function shuffle(o) {
-  for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-  return o;
+function shuffleDeck() {
+  var shuffledDeck = [];
+  while(deck.length) {
+    var rnd = Math.floor(Math.random() * deck.length);
+    shuffledDeck.push(deck.splice(rnd, 1)[0]);
+  }
+  deck = shuffledDeck;
 };
 
-myDeck = shuffle(myDeck);
+// myDeck = shuffle(myDeck);
 
 
 
@@ -64,4 +111,6 @@ myDeck = shuffle(myDeck);
 
 /* Restart the game when the game is finished */
 
+
+initialize();
 

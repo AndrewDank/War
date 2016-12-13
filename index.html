@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <link rel="stylesheet" type="text/css" href="CSS/card-deck-css/css/cardstarter.css">
-      <link rel="stylesheet" type="text/css" href="CSS/main.css">
-      <script src="JS/main.js"></script>
-      <meta charset="UTF-8">
-      <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
-    <title>War: The Card Game</title>
-    </head>
-  <body>
-      <h1>War: The Card Game </h1>
-    <div id="board">
-      <h2 class="top">Player 2</h2>
-        <div class="first">
-          <div class="card clubs J"></div>    <!--Player 2s accumulated cardws -->
-          <div class="card back blue"></div> <!-- This is player 2s stack which is face down. -->
-        </div>
-        <div class="second">
-          <div class="card"></div>
-          <div class="card"></div>
-        </div>
-        <div class="third">
-          <div class="card"></div>
-          <div class="card"></div>
-        </div>
-      <div>
-        <h2 class="bottom">Player 1</h2>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <title>War: The Card Game</title>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="CSS/card-deck-css/css/cardstarter.css">
+  <link rel="stylesheet" type="text/css" href="CSS/main.css">
+</head>
+<body>
+  <h1>War: The Card Game</h1>
+  <div id="board">
+    <h2 class="top">Player 2</h2>
+    <div class="first">
+      <div class="card"></div>    <!--Player 2s accumulated cardws -->
+      <div class="card"></div> <!-- This is player 2s stack which is face down. -->
     </div>
-    <h2>For information on the game <a href="https://en.wikipedia.org/wiki/War_(card_game)">GO HERE</a>
-      <div class="wrapper">
-      <button class="button" autofocus="autofocus">Deal!</button>
-  </body>
+    <div class="second">
+      <div class="card"></div>
+      <div class="card"></div>
+    </div>
+    <div class="third">
+      <div class="card"></div>
+      <div class="card"></div>
+    </div>
+    <h2 class="bottom">Player 1</h2>
+  </div>
+  <h2>For information on the game <a href="https://en.wikipedia.org/wiki/War_(card_game)">GO HERE</a></h2>
+  <button id="deal-btn" autofocus="autofocus">Deal!</button>
+  <script src="JS/main.js"></script>
+</body>
 </html>
