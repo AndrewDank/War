@@ -82,5 +82,17 @@ button {
   top: 50%;
 }
 
+.card.won {
+  background-color: blue;
+}
+
+.card.won p {
+  margin-top: 78px;
+  font-family: orbitron;
+  font-size: 50px;
+  color: white;
+  text-indent: 0;
+}
+
 
 
