@@ -2,11 +2,10 @@
 // global variables
 var deck;
 var playerDecks;
-var wonDecks;
 var battleCards;
-var saveWins;
 var winMessage;
 
+var battleBtn = document.getElementById('battle-btn');
 
 /* Functions */
 
@@ -14,33 +13,21 @@ function initialize() {
   buildDeck();
   shuffleDeck();
   dealPlayerCards();
-  wonDecks = [[], []];
-  saveWins = [0, 0];
   winMessage = null;
   render();
 }
 
 function render() {
-  if (wonDecks) renderPlayersWonStack();
   renderPlayersDecks();
+  renderDeckCounts();
   if (battleCards) renderBattleCards();
 }
 
-function renderPlayersWonStack() {
-  var wonElems = document.querySelectorAll('.card.won');
-  var cardClass;
-  if (wonDecks[0].length > saveWins[0]) {
-    cardClass = 'card won ' + wonDecks[0][wonDecks[0].length - 1 - saveWins[0]].suit + wonDecks[0][wonDecks[0].length - 1- saveWins[0]].name;
-    wonElems[0].className = cardClass;
-  } else {
-    wonElems[0].className = 'card won';
-  }
-  if (wonDecks[1].length > saveWins[1]) {
-    cardClass = 'card won ' + wonDecks[1][wonDecks[1].length - 1 - saveWins[1]].suit + wonDecks[1][wonDecks[1].length - 1 - saveWins[1]].name;
-    wonElems[1].className = cardClass;
-  } else {
-    wonElems[1].className = 'card won';
-  }
+function renderDeckCounts() {
+  var countDeckElems = document.querySelectorAll('.card.won p');
+  countDeckElems[0].innerHTML = playerDecks[0].length + ' &#x25BB;';
+  countDeckElems[1].innerHTML = '&#x25C5; ' + playerDecks[1].length;
+
 }
 
 function renderPlayersDecks() {
@@ -51,10 +38,16 @@ function renderPlayersDecks() {
 
 function renderBattleCards() {
   var battleElems = document.querySelectorAll('.battle .card');
-  var cardClass = 'card ' + battleCards[0][0].suit + battleCards[0][0].name;
-  battleElems[0].className = cardClass;
-  cardClass = 'card ' + battleCards[1][0].suit + battleCards[1][0].name;
-  battleElems[1].className = cardClass;
+  var cardClass;
+  if (battleCards[0].length) {
+    cardClass = 'card ' + battleCards[0][0].suit + battleCards[0][0].name;
+    battleElems[0].className = cardClass;
+    cardClass = 'card ' + battleCards[1][0].suit + battleCards[1][0].name;
+    battleElems[1].className = cardClass;
+  } else {
+    battleElems[0].className = 'card';
+    battleElems[1].className = 'card';
+  }
 }
 
 function renderPlayerDeck(deck, player) {
@@ -118,12 +111,13 @@ function buildDeck(){
 /* *****Event Listeners******* */
 
 /* Trigger the click event */
-document.getElementById('battle-btn').addEventListener('click', handleBattleClick);
+battleBtn.addEventListener('click', handleBattleClick);
 
 
 /* *****Functions******* */
 
 function handleBattleClick() {
+  if (battleBtn.classList.contains('lock')) return;
   battleCards = [[], []];
   saveWins = [0, 0];
   battleCards[0].push(playerDecks[0].pop());
@@ -131,39 +125,35 @@ function handleBattleClick() {
   player1value = battleCards[0][0].value;
   player2value = battleCards[1][0].value;
   if (player1value > player2value) {
-    wonDecks[0].push(battleCards[0][0], battleCards[1][0]);
-    saveWins[0] = 2;
+    winBattle(0);
   } else if (player1value < player2value) {
-    wonDecks[1].push(battleCards[0][0], battleCards[1][0]);
-    saveWins[1] = 2;
+    winBattle(1);
   } else {
     // it's war!
-    console.log('go to war');
+    battleBtn.textContent = "War!"
   }
   winnerCheck();
-  if (!winMessage) flipCheck();
-  render();
   console.log(playerDecks[0], playerDecks[1])
+  render();
 }
 
-function flipCheck() {
-  if (playerDecks[0].length === 0) {
-    console.log('flipping 0')
-    playerDecks[0] = wonDecks[0];
-    wonDecks[0] = [];
-  }
-  if (playerDecks[1].length === 0) {
-    console.log('flipping 1')
-    playerDecks[1] = wonDecks[1];
-    wonDecks[1] = [];
-  }
+function winBattle(player) {
+  battleBtn.textContent = 'Player ' + (player + 1) + ' Wins the Battle';
+  battleBtn.classList.add('lock');
+  setTimeout(function() {
+    playerDecks[player].push(battleCards[0][0], battleCards[1][0]);
+    battleCards = [[], []];
+    battleBtn.textContent = 'Battle';
+    battleBtn.classList.remove('lock');
+    render();
+  }, 2500);
 }
 
 function winnerCheck(){
-  if (wonDecks[0].length === 52) {
+  if (playerDecks[0].length === 52) {
     winMessage = 'Player 1 Wins!';
     console.log("Player 1 wins");
-  } else if (wonDecks[1].length === 52){
+  } else if (playerDecks[1].length === 52){
     winMessage = 'Player 2 Wins!';
     console.log("Player 2 wins");
   }
@@ -179,19 +169,6 @@ function shuffleDeck() {
   }
   deck = shuffledDeck;
 };
-
-// myDeck = shuffle(myDeck);
-
-
-
-
-/* Draw a card using a trigger
-
-/* Trigger  War Mode when both opponents card are matched even.
-
-/* Winning / Losing part.
-
-/* Restart the game when the game is finished */
 
 
 initialize();

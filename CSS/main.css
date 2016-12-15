@@ -74,18 +74,35 @@ button {
   margin: 0 auto;
 }
 
-#battle-btn div {
+#battle-btn {
   margin: 0 auto;
-  width: 50%;
+  width: 70%;
   padding: 20px;
   border: solid 2px red;
   border-radius: 15px;
   cursor: pointer;
 }
 
+#battle-btn.lock {
+  border: none;
+  color: white;
+  cursor: default;
+}
+
 .player1 .card {
   left: 37%;
 }
 
+.card.won {
+  background-color: transparent;
+  border: none;
+  text-indent: 0;
+  font-family: Orbitron;
+  font-size: 26px;
+  color: white;
+}
 
+.card.won p {
+  margin-top: 33px;
+}
 
