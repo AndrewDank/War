@@ -84,7 +84,7 @@ button {
 }
 
 #battle-btn.lock {
-  border: none;
+  border: solid 2px transparent;
   color: white;
   cursor: default;
 }
@@ -104,5 +104,10 @@ button {
 
 .card.won p {
   margin-top: 33px;
+}
+
+#win-msg {
+  color: white;
+  font-size: 60px;
 }
 

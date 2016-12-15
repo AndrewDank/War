@@ -18,9 +18,13 @@ function initialize() {
 }
 
 function render() {
-  renderPlayersDecks();
-  renderDeckCounts();
-  if (battleCards) renderBattleCards();
+  if (winMessage) {
+    document.getElementById('board').innerHTML = '<h1 id="win-msg">' + winMessage + '</h1>';
+  } else {
+    renderPlayersDecks();
+    renderDeckCounts();
+    if (battleCards) renderBattleCards();
+  }
 }
 
 function renderDeckCounts() {
@@ -40,9 +44,10 @@ function renderBattleCards() {
   var battleElems = document.querySelectorAll('.battle .card');
   var cardClass;
   if (battleCards[0].length) {
-    cardClass = 'card ' + battleCards[0][0].suit + battleCards[0][0].name;
+    var cardPointer = battleCards[0].length - 1;
+    cardClass = 'card ' + battleCards[0][cardPointer].suit + battleCards[0][cardPointer].name;
     battleElems[0].className = cardClass;
-    cardClass = 'card ' + battleCards[1][0].suit + battleCards[1][0].name;
+    cardClass = 'card ' + battleCards[1][cardPointer].suit + battleCards[1][cardPointer].name;
     battleElems[1].className = cardClass;
   } else {
     battleElems[0].className = 'card';
@@ -117,45 +122,64 @@ battleBtn.addEventListener('click', handleBattleClick);
 /* *****Functions******* */
 
 function handleBattleClick() {
-  if (battleBtn.classList.contains('lock')) return;
-  battleCards = [[], []];
-  saveWins = [0, 0];
-  battleCards[0].push(playerDecks[0].pop());
-  battleCards[1].push(playerDecks[1].pop());
-  player1value = battleCards[0][0].value;
-  player2value = battleCards[1][0].value;
+  if (battleBtn.textContent === 'Go to War!') {
+    if (playerDecks[0].length < 2) {
+      winMessage = 'Player 2 Wins!';
+    } else if (playerDecks[1].length < 2) {
+      winMessage = 'Player 1 Wins!';
+    } else {
+      // go to war
+      for (var i = 0; i < 2; i++) {
+        battleCards[0].push(playerDecks[0].pop());
+        battleCards[1].push(playerDecks[1].pop());
+      }
+      determineBattleWinner();
+    }
+  } else {
+    if (battleBtn.classList.contains('lock')) return;
+    battleCards = [[], []];
+    battleCards[0].push(playerDecks[0].pop());
+    battleCards[1].push(playerDecks[1].pop());
+    determineBattleWinner();
+  }
+  render();
+}
+
+function determineBattleWinner() {
+  var cardPointer = battleCards[0].length - 1;
+  player1value = battleCards[0][cardPointer].value;
+  player2value = battleCards[1][cardPointer].value;
   if (player1value > player2value) {
     winBattle(0);
   } else if (player1value < player2value) {
     winBattle(1);
   } else {
     // it's war!
-    battleBtn.textContent = "War!"
+    battleBtn.textContent = 'Go to War!';
   }
-  winnerCheck();
-  console.log(playerDecks[0], playerDecks[1])
-  render();
 }
 
 function winBattle(player) {
-  battleBtn.textContent = 'Player ' + (player + 1) + ' Wins the Battle';
+  var battleOrWar = battleCards[0].length > 1 ? 'War' : 'Battle';
+  battleBtn.textContent = 'Player ' + (player + 1) + ' Wins the ' + battleOrWar;
   battleBtn.classList.add('lock');
   setTimeout(function() {
-    playerDecks[player].push(battleCards[0][0], battleCards[1][0]);
+    while (battleCards[0].length) {
+      playerDecks[player].unshift(battleCards[0].pop(), battleCards[1].pop());
+    }
     battleCards = [[], []];
     battleBtn.textContent = 'Battle';
-    battleBtn.classList.remove('lock');
+    winnerCheck();
     render();
-  }, 2500);
+    battleBtn.classList.remove('lock');
+  }, 2000);
 }
 
 function winnerCheck(){
   if (playerDecks[0].length === 52) {
     winMessage = 'Player 1 Wins!';
-    console.log("Player 1 wins");
   } else if (playerDecks[1].length === 52){
     winMessage = 'Player 2 Wins!';
-    console.log("Player 2 wins");
   }
 }
 
