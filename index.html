@@ -9,47 +9,33 @@
 </head>
 <body>
   <h1>War: The Card Game</h1>
-  <!-- <div id="board">
-   <h2 class="top">Player 2</h2>
-    <div class="first">
-      <div class="card"></div>
-      <div class="card"></div>
-    </div>
-    <div class="second">
-      <div class="card"></div>
-      <div class="card"></div>
-    </div>
-    <div class="third">
-      <div class="card"></div>
-      <div class="card"></div>
-    </div>
-    <h2 class="bottom">Player 1</h2>
-  </div> -->
 
   <!-- width 100% -->
   <div id="board">
-    <!-- player 1 50% width -->
-    <div class="player1">
-      <div class="title">
-        <h1>Player 1</h1>
+    <div id="player-wrap">
+      <!-- player 1 50% width -->
+      <div class="player1">
+        <div class="title">
+          <h1>Player 1</h1>
+        </div>
+        <div class="card won"></div>
+        <div class="card deck"></div>
       </div>
-      <div class="card won"><p></p></div>
-      <div class="card deck"></div>
-    </div>
 
-    <!-- player 2 50% width -->
-    <div class="player2">
-      <div class="title">
-        <h1>Player2</h1>
+      <!-- player 2 50% width -->
+      <div class="player2">
+        <div class="title">
+          <h1>Player2</h1>
+        </div>
+        <div class="card deck"></div>
+        <div class="card won"></div>
       </div>
-      <div class="card deck"></div>
-      <div class="card won"><p></p></div>
     </div>
 
     <!-- battle section will be cenetered make button -->
     <div class="battle">
       <div class="title">
-        <h1>Battle</h1>
+        <h1 id="battle-btn"><div>Battle</div></h1>
       </div>
 
       <div class="card"></div>
@@ -59,7 +45,6 @@
     </div>
   </div>
   <h2>For information on the game <a href="https://en.wikipedia.org/wiki/War_(card_game)">GO HERE</a></h2>
-  <button id="battle-btn" autofocus="autofocus">Battle!</button>
   <script src="JS/main.js"></script>
 </body>
 </html>
