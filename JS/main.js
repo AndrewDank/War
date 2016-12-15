@@ -4,8 +4,10 @@ var deck;
 var playerDecks;
 var battleCards;
 var winMessage;
-
 var battleBtn = document.getElementById('battle-btn');
+
+// Variables
+
 
 /* Functions */
 
@@ -63,6 +65,19 @@ function renderPlayerDeck(deck, player) {
     deck.classList.add('outline');
   }
 }
+function handlePlaySound() {
+  var selectedSound = document.querySelector('input[name="sound"]:checked').value;
+  playSound(selectedSound);
+}
+
+function playSound(name) {
+  player.src = sounds[name];
+  player.play();
+}
+
+function handleBgChanged() {
+  bgCheckbox.checked ? bgPlayer.play() : bgPlayer.pause();
+}
 
 /* when the value of the two cards is tied, each player will draw three cards
 from their stack facedown. The fourth card will be faced up and the player with
@@ -114,6 +129,9 @@ function buildDeck(){
 
 
 /* *****Event Listeners******* */
+// Event Listeners
+
+
 
 /* Trigger the click event */
 battleBtn.addEventListener('click', handleBattleClick);
