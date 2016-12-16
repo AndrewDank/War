@@ -6,7 +6,7 @@ I. Description of Game
 
 -War is a card game that is played between two players. The object of the game is 
 for a player to gain all 52 cards and their opponent to lose all of the cards.
-/Users/andrewdank/War/README.md
+
 -More information of the game can be be found here: https://en.wikipedia.org/wiki/War_(card_game)
 
 II. Technologies Used
