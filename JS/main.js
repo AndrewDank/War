@@ -6,9 +6,6 @@ var battleCards;
 var winMessage;
 var battleBtn = document.getElementById('battle-btn');
 
-// Variables
-
-
 /* Functions */
 
 function initialize() {
@@ -87,12 +84,6 @@ If tied, the two players will go over the process again until the tie
 is broken. If the players run out of cards in their deck, then they will turn over the
 stacked decked cards and continue the "War" part. */
 
-function launchWarMode(){
-
-
-}
-
-
 /* Create a card object that will create a value, name, and suit
 for each card */
 
@@ -127,17 +118,16 @@ function buildDeck(){
   });
 }
 
-
 /* *****Event Listeners******* */
 // Event Listeners
-
-
 
 /* Trigger the click event */
 battleBtn.addEventListener('click', handleBattleClick);
 
 
 /* *****Functions******* */
+
+/* War Code */
 
 function handleBattleClick() {
   if (battleBtn.textContent === 'Go to War!') {

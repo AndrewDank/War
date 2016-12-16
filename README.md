@@ -1,10 +1,12 @@
 I dedicate the first game I ever made to Eli, my 7 month old nephew.
 
+Demo Page: https://andrewdank.github.io/War/
+
 I. Description of Game
 
 -War is a card game that is played between two players. The object of the game is 
 for a player to gain all 52 cards and their opponent to lose all of the cards.
-
+/Users/andrewdank/War/README.md
 -More information of the game can be be found here: https://en.wikipedia.org/wiki/War_(card_game)
 
 II. Technologies Used
@@ -12,6 +14,8 @@ II. Technologies Used
 -HTML, CSS, and JavaScript. Computer used was a Macbook Pro.
 
 III. Getting Started
+
+Just load the page, because there is nothing really to install.
 
 Go here to play War: https://andrewdank.github.io/War/
 
